@@ -30,9 +30,10 @@ export class MainController {
         };
 
         $scope.$watch(pokemonService.getPokemons, newValue => {
+            debugger;
             this.allPokemons = newValue;
             this.applyFilter(this.currentFilter);
-            this.loadMore.isDisabled = false;
+            this.loadMore.isDisabled = this.allPokemons.length ? false : true;
         });
 
     }
