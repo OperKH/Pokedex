@@ -1,3 +1,54 @@
-<div class="container">
-    <h1>{{main.message}}</h1>
+<div class="container text-center">
+    <div class="header row">
+        <div class="logo col-xs-offset-3 col-xs-6 block-bordered" ui-sref="home">
+            <h2>Pokedex</h2>
+        </div>
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3">
+            <div class="form-group">
+                <label for="type-filter">Filter showed by Type:</label>
+                <select class="form-control block-bordered"
+                        id="type-filter"
+                        ng-model="main.currentFilter"
+                        ng-change="main.applyFilter(main.currentFilter)">
+                    <option></option>
+                    <option ng-repeat="type in main.pokemonTypes" track by type.id>{{::type.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="content row">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-5 col-md-offset-1 col-md-4 pokemon-info-holder">
+            <div ui-view></div>
+        </div>
+        <div class="col-sm-7">
+            <div class="pokemons-list-holder row">
+                <div class="col-sm-4 col-xs-6"
+                     ng-repeat="pokemon in main.pokemons" track by pokemon.pkdx_id
+                     ui-sref="home.pokemon({id: pokemon.pkdx_id})">
+                    <div class="pokemon-card block-bordered">
+                        <div class="img-holder">
+                            <img ng-src="http://pokeapi.co/media/img/{{::pokemon.pkdx_id}}.png">
+                        </div>
+                        <div class="pokemon-name-holder">{{::pokemon.name}}</div>
+                        <div class="pokemon-types-holder">
+                            <button class="pokemon-type"
+                                    ng-repeat="type in pokemon.types" track by type.name
+                                    ng-class="type.name">
+                                        {{::type.name}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="load-more-button-holder row" ng-if="main.allPokemons.length">
+                <div class="col-md-12">
+                    <button class="load-more"
+                            ng-click="main.loadMore.getMore()"
+                            ng-disabled="main.loadMore.isDisabled">
+                                Load More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

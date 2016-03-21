@@ -1,7 +1,11 @@
 {
   "name": "pokedex",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "babel-eslint": "^5.0.0",
+    "karma-phantomjs2-launcher": "^0.5.0",
+    "phantomjs2": "^2.2.0"
+  },
   "scripts": {
     "test": "gulp test"
   },

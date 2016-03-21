@@ -3,7 +3,7 @@
  *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
  */
 
-
+$table-border-color: #333;
 
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
@@ -12,6 +12,14 @@
 // bower:scss
 // endbower
 
+.block-bordered {
+    border: 1px solid #333;
+}
+
+select.form-control:focus {
+    box-shadow: none;
+    border-color: initial;
+}
 
 
 /**

@@ -1,0 +1,48 @@
+<div class="pokemon-info block-bordered" ng-class="pokemonInfo.spinnerClass">
+    <div class="spinner-helper">
+        <div class="img-holder">
+            <img ng-src="http://pokeapi.co/media/img/{{::pokemonInfo.pokemon.pkdx_id}}.png">
+        </div>
+        <div class="pokemon-name-holder">
+            <h2>{{::pokemonInfo.pokemon.name}} #{{pokemonInfo.pokemon.pkdx_id | numberFixedLen:3 }}</h2>
+        </div>
+        <div class="table-wrapper">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>Type</td>
+                        <td>{{::pokemonInfo.pokemon.type}}</td>
+                    </tr>
+                    <tr>
+                        <td>Attack</td>
+                        <td>{{::pokemonInfo.pokemon.attack}}</td>
+                    </tr>
+                    <tr>
+                        <td>Defence</td>
+                        <td>{{::pokemonInfo.pokemon.defense}}</td>
+                    </tr>
+                    <tr>
+                        <td>HP</td>
+                        <td>{{::pokemonInfo.pokemon.hp}}</td>
+                    </tr>
+                    <tr>
+                        <td>SP Attack</td>
+                        <td>{{::pokemonInfo.pokemon.sp_atk}}</td>
+                    </tr>
+                    <tr>
+                        <td>SP Defence</td>
+                        <td>{{::pokemonInfo.pokemon.sp_def}}</td>
+                    </tr>
+                    <tr>
+                        <td>Speed</td>
+                        <td>{{::pokemonInfo.pokemon.speed}}</td>
+                    </tr>
+                    <tr>
+                        <td>Waight</td>
+                        <td>{{::pokemonInfo.pokemon.weight}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+.pokemon-info {
+    margin: 0 0 20px;
+    .pokemon-name-holder {
+        h2 {
+            font-weight: bold;
+            margin-top: 0;
+        }
+    }
+    .table-wrapper {
+        padding: 0 15px;
+    }
+}
+
+.pokemon-info.spinner {
+    position: relative;
+    > * {
+        visibility: hidden;
+    }
+    &.spinner-active {
+        &:after {
+            font-family: "spin";
+            font-size: 150px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: inline-block;
+            margin: -107px 0 0 -75px;
+            content: "\e800";
+            animation: spin 2s infinite linear;
+            opacity: 0.8;
+        }
+    }
+}
+
+@media (min-width: 480px) {
+    .pokemon-info {
+        margin: 0 0 20px 0;
+    }
+}
+
