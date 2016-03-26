@@ -1,7 +1,7 @@
 export function pokemonService($resource, $q) {
     'ngInject';
 
-    const pokeApi = $resource('http://pokeapi.co/api/v1/:uri/:params/:id', {}, {}, {
+    const pokeApi = $resource('//pokeapi.co/api/v1/:uri/:params/:id', {}, {}, {
         cancellable: true
     });
     let paginationReuestParams = {
@@ -12,11 +12,14 @@ export function pokemonService($resource, $q) {
 
     let pokemons = [];
     let getPokemonByIDReuest;
+    let getMorePokemonsReuest;
 
     pokeApi
         .get(paginationReuestParams).$promise
         .then(data => {
+            paginationReuestParams.offset += paginationReuestParams.limit;
             pokemons = data.objects;
+            pokemons.$total = data.meta.total_count;
         });
 
     return {
@@ -46,11 +49,18 @@ export function pokemonService($resource, $q) {
             return resultWithPromise;
         },
         getMorePokemons: () => {
-            paginationReuestParams.offset += paginationReuestParams.limit;
-            pokeApi.get(paginationReuestParams).$promise.then(data => {
-                paginationReuestParams.total = data.meta.total;
+            getMorePokemonsReuest = pokeApi.get(paginationReuestParams);
+            getMorePokemonsReuest.$promise.then(data => {
+                paginationReuestParams.offset += paginationReuestParams.limit;
+                const total = data.meta.total_count;
                 pokemons = [...pokemons, ...data.objects];
+                pokemons.$total = total;
             });
+        },
+        cancelGetMorePokemons: () => {
+            if (getMorePokemonsReuest) {
+                getMorePokemonsReuest.$cancelRequest();
+            }
         },
         getAllTypes: () => {
             const config = {

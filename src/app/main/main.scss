@@ -33,6 +33,7 @@
     }
 }
 .content {
+    position: relative;
     .pokemons-list-holder {
         .pokemon-card {
             display: inline-block;
@@ -157,5 +158,9 @@
 @media (min-width: 768px) {
     .pokemon-info-holder {
         float: right;
+        .pokemon-info {
+            position: fixed;
+            min-width: 282px;
+        }
     }
 }

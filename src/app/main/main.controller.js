@@ -7,6 +7,7 @@ export class MainController {
         this.pokemonTypes = pokemonService.getAllTypes().then(data => {
             this.pokemonTypes = data;
         });
+        let lastFilterParams = {};
         this.applyFilter = type => {
             if (this.allPokemons.length) {
                 const filteredType = type.toLowerCase();
@@ -16,23 +17,44 @@ export class MainController {
                         return typesArr.includes(filteredType);
                     });
                     this.pokemons = [...filteredPokemons];
+                    const newPokemonsLength  = this.pokemons.length;
+                    if (lastFilterParams.type === type && lastFilterParams.pokemonsLength === newPokemonsLength) {
+                        this.loadMore.getMore();
+                    } else {
+                        pokemonService.cancelGetMorePokemons();
+                        this.loadMore.isDisabled = false;
+                    }
                 } else {
                     this.pokemons = [...this.allPokemons];
+                    this.loadMore.isDisabled = false;
                 }
+                lastFilterParams = {
+                    type,
+                    pokemonsLength: this.pokemons.length
+                };
             }
+
         };
         this.loadMore = {
             isDisabled: true,
+            isVisible: true,
             getMore: () => {
-                this.loadMore.isDisabled = true;
-                pokemonService.getMorePokemons();
+                if ($scope.main.allPokemons.length < $scope.main.allPokemons.$total) {
+                    $scope.$applyAsync(() => {
+                        $scope.main.loadMore.isDisabled = true;
+                    });
+                    pokemonService.getMorePokemons();
+                } else {
+                    $scope.$applyAsync(() => {
+                        $scope.main.loadMore.isVisible = false;
+                    });
+                }
             }
         };
 
         $scope.$watch(pokemonService.getPokemons, newValue => {
             this.allPokemons = newValue;
             this.applyFilter(this.currentFilter);
-            this.loadMore.isDisabled = this.allPokemons.length ? false : true;
         });
 
     }

@@ -17,8 +17,7 @@ export class PokemonInformationController {
             $timeout.cancel(timerPromise);
             if (newValue) {
                 this.spinnerClass = '';
-            }
-            else {
+            } else {
                 this.spinnerClass = 'spinner';
                 timerPromise = $timeout(() => {
                     this.spinnerClass = 'spinner spinner-active';
