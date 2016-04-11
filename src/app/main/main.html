@@ -11,7 +11,7 @@
                         ng-model="main.currentFilter"
                         ng-change="main.applyFilter(main.currentFilter)">
                     <option></option>
-                    <option ng-repeat="type in main.pokemonTypes" track by type.id>{{::type.name}}</option>
+                    <option ng-repeat="type in main.pokemonTypes track by type.id">{{::type.name}}</option>
                 </select>
             </div>
         </div>
@@ -28,7 +28,7 @@
             </div>
             <div class="pokemons-list-holder row">
                 <div class="col-sm-4 col-xs-6"
-                     ng-repeat="pokemon in main.pokemons" track by pokemon.pkdx_id
+                     ng-repeat="pokemon in main.pokemons track by pokemon.pkdx_id"
                      ui-sref="home.pokemon({id: pokemon.pkdx_id})">
                     <div class="pokemon-card block-bordered">
                         <div class="img-holder">
@@ -37,7 +37,7 @@
                         <div class="pokemon-name-holder">{{::pokemon.name}}</div>
                         <div class="pokemon-types-holder">
                             <button class="pokemon-type"
-                                    ng-repeat="type in pokemon.types" track by type.name
+                                    ng-repeat="type in pokemon.types track by type.name"
                                     ng-class="type.name">
                                         {{::type.name}}
                             </button>
